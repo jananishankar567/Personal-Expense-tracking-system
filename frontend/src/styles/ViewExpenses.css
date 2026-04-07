@@ -1,0 +1,79 @@
+.view-expenses-section {
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin: 20px 0;
+}
+
+.view-expenses-section h3 {
+  margin-bottom: 15px;
+  color: #1a73e8;
+}
+
+.view-expense-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.view-expense-controls input,
+.view-expense-controls select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.view-expense-controls input:focus,
+.view-expense-controls select:focus {
+  border-color: #1a73e8;
+  outline: none;
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expenses-table th,
+.expenses-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.expenses-table th {
+  background-color: #f4f6f8;
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.expenses-table tr:hover {
+  background-color: #f1f1f1;
+  transition: all 0.2s;
+}
+
+/* Dark mode support */
+.dark-mode .view-expenses-section {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.dark-mode .view-expense-controls input,
+.dark-mode .view-expense-controls select {
+  background-color: #3a3a3a;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-mode .expenses-table th {
+  background-color: #1f1f1f;
+  color: #1a73e8;
+}
+
+.dark-mode .expenses-table tr:hover {
+  background-color: #444;
+}

@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+/* Center container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full viewport height */
+}
+
+/* Card */
+.auth-card {
+  background: white;
+  padding: 40px 30px; /* increased padding for spacing */
+  width: 340px;       /* slightly wider */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading */
+.auth-card h2 {
+  margin-bottom: 25px;
+}
+
+/* Input fields */
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Button (Professional Blue) */
+.auth-card button {
+  width: 100%;           /* full width inside card */
+  padding: 12px;
+  margin-top: 20px;      /* space from input */
+  background: #2563eb;   /* professional blue */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.auth-card button:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Signup / Login text */
+.auth-card p {
+  margin-top: 18px;
+  color: #2563eb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
+
+/* Hover for text */
+.auth-card p:hover {
+  text-decoration: underline;
+  color: #1d4ed8;
+}
