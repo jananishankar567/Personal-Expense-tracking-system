@@ -56,9 +56,36 @@
 //   return res.data;
 // };
 
+// import axios from "axios";
+
+// const API_URL = "https://personal-expense-tracking-system.onrender.com/api" || "http://localhost:5000/api";
+
+// const getToken = () => localStorage.getItem("token");
+
+// // Add expense
+// export const addExpense = async (expense) => {
+//   const res = await axios.post(`${API_URL}/expenses`, expense, {
+//     headers: {
+//       Authorization: `Bearer ${getToken()}`, // ✅ FIX
+//     },
+//   });
+//   return res.data;
+// };
+
+// // Get expenses
+// export const getExpenses = async () => {
+//   const res = await axios.get(`${API_URL}/expenses`, {
+//     headers: {
+//       Authorization: `Bearer ${getToken()}`, // ✅ FIX
+//     },
+//   });
+//   return res.data;
+// };
+
 import axios from "axios";
 
-const API_URL = "https://personal-expense-tracking-system.onrender.com/api" || "http://localhost:5000/api";
+// ✅ Use env variable — no more hardcoded URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 const getToken = () => localStorage.getItem("token");
 
@@ -66,7 +93,7 @@ const getToken = () => localStorage.getItem("token");
 export const addExpense = async (expense) => {
   const res = await axios.post(`${API_URL}/expenses`, expense, {
     headers: {
-      Authorization: `Bearer ${getToken()}`, // ✅ FIX
+      Authorization: `Bearer ${getToken()}`,
     },
   });
   return res.data;
@@ -76,7 +103,7 @@ export const addExpense = async (expense) => {
 export const getExpenses = async () => {
   const res = await axios.get(`${API_URL}/expenses`, {
     headers: {
-      Authorization: `Bearer ${getToken()}`, // ✅ FIX
+      Authorization: `Bearer ${getToken()}`,
     },
   });
   return res.data;
