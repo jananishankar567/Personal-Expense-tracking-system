@@ -374,6 +374,8 @@ const generateToken = (id) => {
 export const signup = async (req, res) => {
   const { name, email, password } = req.body;
 
+  console.log("Signup attempt:", { name, email, password: password ? "provided" : "missing" });
+
   if (!name || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -381,9 +383,11 @@ export const signup = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log("User already exists:", email);
       return res.status(400).json({ message: "Email already registered" });
     }
 
+    console.log("Creating user...");
     const user = await User.create({
       name,
       email,
@@ -391,12 +395,17 @@ export const signup = async (req, res) => {
       income: 0,
     });
 
+    console.log("User created:", user._id, user.name, user.email);
+
+    const token = generateToken(user._id);
+    console.log("Token generated for user:", user._id);
+
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       income: user.income,
-      token: generateToken(user._id),
+      token: token,
     });
   } catch (error) {
     console.error("SIGNUP ERROR:", error.message);
@@ -410,23 +419,38 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log("Login attempt:", { email, password: password ? "provided" : "missing" });
+
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
 
   try {
     const user = await User.findOne({ email });
+    console.log("User found in DB:", user ? "Yes" : "No");
 
-    if (!user || !(await user.matchPassword(password))) {
+    if (!user) {
+      console.log("User not found:", email);
       return res.status(401).json({ message: "Invalid credentials" });
     }
+
+    const isMatch = await user.matchPassword(password);
+    console.log("Password match:", isMatch ? "Yes" : "No");
+
+    if (!isMatch) {
+      console.log("Password mismatch for user:", email);
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = generateToken(user._id);
+    console.log("Login successful for user:", user._id);
 
     res.status(200).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       income: user.income,
-      token: generateToken(user._id),
+      token: token,
     });
   } catch (error) {
     console.error("LOGIN ERROR:", error.message);

@@ -95,44 +95,91 @@
 
 // export default App;
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+// import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+// import Login from "./pages/Login";
+// import Signup from "./pages/Signup";
+// import Dashboard from "./components/Dashboard";
+
+// function App() {
+//   // ✅ DIRECT READ (NO useEffect, NO warning)
+//   const isAuthenticated = !!localStorage.getItem("token");
+
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         {/* Login */}
+//         <Route
+//           path="/"
+//           element={
+//             isAuthenticated ? <Navigate to="/dashboard" /> : <Login />
+//           }
+//         />
+
+//         {/* Signup */}
+//         <Route
+//           path="/signup"
+//           element={
+//             isAuthenticated ? <Navigate to="/dashboard" /> : <Signup />
+//           }
+//         />
+
+//         {/* Dashboard */}
+//         <Route
+//           path="/dashboard"
+//           element={
+//             isAuthenticated ? <Dashboard /> : <Navigate to="/" />
+//           }
+//         />
+
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-  // ✅ DIRECT READ (NO useEffect, NO warning)
-  const isAuthenticated = !!localStorage.getItem("token");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
+
+  const handleAuthChange = (value) => {
+    setIsAuthenticated(value);
+  };
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* Login */}
         <Route
           path="/"
           element={
-            isAuthenticated ? <Navigate to="/dashboard" /> : <Login />
+            isAuthenticated ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Login onLogin={() => handleAuthChange(true)} />
+            )
           }
         />
-
-        {/* Signup */}
         <Route
           path="/signup"
           element={
-            isAuthenticated ? <Navigate to="/dashboard" /> : <Signup />
+            isAuthenticated ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Signup onSignup={() => handleAuthChange(true)} />
+            )
           }
         />
-
-        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
-            isAuthenticated ? <Dashboard /> : <Navigate to="/" />
+            isAuthenticated ? (
+              <Dashboard onLogout={() => handleAuthChange(false)} />
+            ) : (
+              <Navigate to="/" />
+            )
           }
         />
-
-        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

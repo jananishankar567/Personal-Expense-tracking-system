@@ -1,309 +1,53 @@
-// import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import "../styles/Auth.css";
-
-// function Login() {
-//   const navigate = useNavigate();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleLogin = () => {
-//     console.log(email, password);
-//     navigate("/dashboard");
-//   };
-
-//   return (
-//     <div className="auth-container">
-//       <div className="auth-card">
-//         <h2>Login</h2>
-
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button onClick={handleLogin}>Login</button>
-
-//         <p onClick={() => navigate("/signup")}>
-//           Don't have an account? Signup
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-// import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import "../styles/Auth.css";
-
-// function Login() {
-//   const navigate = useNavigate();
-
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleLogin = async () => {
-//     try {
-//       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ email, password }),
-//       });
-
-//       const data = await res.json();
-
-//       if (data.token) {
-//         localStorage.setItem("token", data.token); // ✅ store token
-//         navigate("/dashboard"); // ✅ redirect
-//       } else {
-//         alert(data.message || "Login failed");
-//       }
-//     } catch (err) {
-//       console.error(err);
-//       alert("Server error");
-//     }
-//   };
-
-//   return (
-//     <div className="auth-container">
-//       <div className="auth-card">
-//         <h2>Login</h2>
-
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button onClick={handleLogin}>Login</button>
-
-//         <p onClick={() => navigate("/signup")}>
-//           Don't have an account? Signup
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-// import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import "../styles/Auth.css";
-
-// function Login() {
-//   const navigate = useNavigate();
-
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const handleLogin = async () => {
-//     if (!email || !password) {
-//       alert("Please enter email and password");
-//       return;
-//     }
-
-//     try {
-//       setLoading(true);
-
-//       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ email, password }),
-//       });
-
-//       const data = await res.json();
-
-//       if (res.ok && data.token) {
-//         // ✅ Store token
-//         localStorage.setItem("token", data.token);
-
-//         // ✅ FORCE REDIRECT (fix blank page issue)
-//         window.location.href = "/dashboard";
-//       } else {
-//         alert(data.message || "Invalid credentials");
-//       }
-//     } catch (err) {
-//       console.error(err);
-//       alert("Server error. Please try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="auth-container">
-//       <div className="auth-card">
-//         <h2>Login</h2>
-
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button onClick={handleLogin} disabled={loading}>
-//           {loading ? "Logging in..." : "Login"}
-//         </button>
-
-//         <p onClick={() => navigate("/signup")}>
-//           Don't have an account? Signup
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-// import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import "../styles/Auth.css";
-
-// function Login() {
-//   const navigate = useNavigate();
-
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const handleLogin = async () => {
-//     if (!email || !password) {
-//       alert("Please enter email and password");
-//       return;
-//     }
-
-//     try {
-//       setLoading(true);
-
-//       const res = await fetch(
-//         `${import.meta.env.VITE_API_URL}/api/auth/login`, // ✅ FIXED
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({ email, password }),
-//         }
-//       );
-
-//       const data = await res.json();
-
-//       if (res.ok && data.token) {
-//         localStorage.setItem("token", data.token);
-
-//         // ✅ better navigation
-//         navigate("/dashboard");
-//       } else {
-//         alert(data.message || "Invalid credentials");
-//       }
-//     } catch (err) {
-//       console.error(err);
-//       alert("Server error. Please try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="auth-container">
-//       <div className="auth-card">
-//         <h2>Login</h2>
-
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button onClick={handleLogin} disabled={loading}>
-//           {loading ? "Logging in..." : "Login"}
-//         </button>
-
-//         <p onClick={() => navigate("/signup")}>
-//           Don't have an account? Signup
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import "../styles/Auth.css";
 
-function Login() {
-  const navigate = useNavigate();
-
+function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      alert("Please enter email and password");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const trimmedEmail = email.trim().toLowerCase();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
+      setError("Please enter email and password");
       return;
     }
 
     try {
       setLoading(true);
+      setError("");
+      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const res = await fetch(`${apiBase}/auth/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmedEmail, password: trimmedPassword }),
       });
 
       const data = await res.json();
-
       if (res.ok && data.token) {
         localStorage.setItem("token", data.token);
-        window.location.href = "/dashboard";
+        onLogin?.();
+        navigate("/dashboard");
       } else {
-        alert(data.message || "Invalid credentials");
+        setError(data.message || "Invalid credentials");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Login error:", err);
       alert("Server error. Please try again.");
     } finally {
       setLoading(false);
@@ -314,28 +58,27 @@ function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <h2>Login</h2>
-
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button onClick={handleLogin} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-
-        <p onClick={() => navigate("/signup")}>
-          Don't have an account? Signup
-        </p>
+        {error && <p className="auth-error">{error}</p>}
+        <form onSubmit={handleLogin} style={{ width: "100%" }}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <p onClick={() => navigate("/signup")}>Don't have an account? Signup</p>
       </div>
     </div>
   );
